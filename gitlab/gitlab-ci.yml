@@ -1,0 +1,6 @@
+stages:
+  - test
+
+noop:
+  stage:  test
+  script: /bin/true
