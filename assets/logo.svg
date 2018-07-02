@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   id="telek"
+   version="1.1"
+   viewBox="0 0 135.46667 135.46667"
+   height="512"
+   width="512">
+  <metadata
+     id="metadata1042">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="definitions">
+    <linearGradient
+       id="sky-gradient"
+       x1="160.008"
+       y1="40.007999"
+       y2="180"
+       x2="100.008"
+       gradientTransform="matrix(0.22302439,0,0,0.39648781,41.143872,20.105236)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         id="sky-gradient-stop-1"
+         offset="0.1183"
+         stop-color="#0095D5" />
+      <stop
+         id="sky-gradient-stop-2"
+         offset="0.4178"
+         stop-color="#3C83DC" />
+      <stop
+         id="sky-gradient-stop-3"
+         offset="0.6962"
+         stop-color="#6D74E1" />
+      <stop
+         id="sky-gradient-stop-4"
+         offset="0.8333"
+         stop-color="#806EE3" />
+    </linearGradient>
+    <linearGradient
+       id="cabin-in-gradient"
+       x1="180.33203"
+       y1="229.79492"
+       x2="236.58182"
+       y2="287.94907"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.48367311,0,0,0.48367311,-46.464638,-43.010606)">
+      <stop
+         id="cabin-in-gradient-stop-1"
+         offset="0.1768"
+         stop-color="#F88909" />
+      <stop
+         id="cabin-in-gradient-stop-2"
+         offset="0.2570"
+         stop-color="#F58613" />
+      <stop
+         id="cabin-in-gradient-stop-3"
+         offset="0.3952"
+         stop-color="#EE7E2F" />
+      <stop
+         id="cabin-in-gradient-stop-4"
+         offset="0.5746"
+         stop-color="#E1725C" />
+      <stop
+         id="cabin-in-gradient-stop-5"
+         offset="0.7862"
+         stop-color="#D0609A" />
+      <stop
+         id="cabin-in-gradient-stop-6"
+         offset="0.8925"
+         stop-color="#C757BC" />
+    </linearGradient>
+    <linearGradient
+       id="cabin-out-gradient"
+       x1="216.625"
+       y1="228.45605"
+       x2="216.28711"
+       y2="275.83105"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.48367311,0,0,0.48367311,-46.464638,-43.010606)">
+      <stop
+         id="cabin-out-gradient-stop-1"
+         offset="0.1768"
+         stop-color="#F88909" />
+      <stop
+         id="cabin-out-gradient-stop-2"
+         offset="0.2570"
+         stop-color="#F58613" />
+      <stop
+         id="cabin-out-gradient-stop-3"
+         offset="0.3952"
+         stop-color="#EE7E2F" />
+      <stop
+         id="cabin-out-gradient-stop-4"
+         offset="0.5746"
+         stop-color="#E1725C" />
+      <stop
+         id="cabin-out-gradient-stop-5"
+         offset="0.7862"
+         stop-color="#D0609A" />
+      <stop
+         id="cabin-out-gradient-stop-6"
+         offset="0.8925"
+         stop-color="#C757BC" />
+    </linearGradient>
+    <linearGradient
+       id="paper-plane-top-gradient"
+       x1="-75.477264"
+       y1="317.06802"
+       x2="153.53609"
+       y2="84.407501"
+       gradientTransform="matrix(0.52812656,0,0,0.44296136,7.2230739,11.644453)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         id="paper-plane-top-gradient-stop-1"
+         offset="0.1768"
+         stop-color="#F88909" />
+      <stop
+         id="paper-plane-top-gradient-stop-2"
+         offset="0.2570"
+         stop-color="#F58613" />
+      <stop
+         id="paper-plane-top-gradient-stop-3"
+         offset="0.3952"
+         stop-color="#EE7E2F" />
+      <stop
+         id="paper-plane-top-gradient-stop-4"
+         offset="0.5746"
+         stop-color="#E1725C" />
+      <stop
+         id="paper-plane-top-gradient-stop-5"
+         offset="0.7862"
+         stop-color="#D0609A" />
+      <stop
+         id="paper-plane-top-gradient-stop-6"
+         offset="0.8925"
+         stop-color="#C757BC" />
+    </linearGradient>
+  </defs>
+  <rect
+     id="sky"
+     fill="url(#sky-gradient)"
+     x="16.933336"
+     y="16.933336"
+     ry="6.742651"
+     height="101.60001"
+     width="101.60001" />
+  <g
+     id="plane">
+    <path
+       id="cabin-in"
+       fill="url(#cabin-in-gradient)"
+       d="m 82.275543,56.09326 c -0.420375,-0.0059 -0.989605,0.145996 -1.577606,0.502565 l -33.215685,20.95476 -0.0019,-9.67e-4 4.933089,16.237056 c 0.648567,1.790389 0.329299,2.500576 2.209636,2.500576 L 62.16532,86.33511 55.60928,81.491767 82.523991,57.204194 c 0.738235,-0.655193 0.452167,-1.101174 -0.248448,-1.110934 z"
+       shape-rendering="geometricPrecision" />
+    <path
+       id="cabin-out"
+       fill="url(#cabin-out-gradient)"
+       d="m 55.611172,81.49271 -0.98813,14.79454 c 1.451019,0 2.092118,-0.6636 2.902039,-1.45102 l 6.97075,-6.778978 z"
+       shape-rendering="geometricPrecision" />
+    <path
+       id="paper-plane-top"
+       fill="url(#paper-plane-top-gradient)"
+       d="m 55.609733,81.491684 23.390431,17.281155 c 2.669144,1.472741 4.595568,0.710227 5.260432,-2.478098 l 9.521099,-44.866968 c 0.974793,-3.908175 -1.489756,-5.68074 -4.04322,-4.521473 L 33.830697,68.464094 c -3.816231,1.530681 -3.793966,3.65976 -0.695612,4.608437 l 14.347203,4.477991 33.215281,-20.955137 c 1.568015,-0.950852 3.007133,-0.439653 1.825953,0.608655"
+       shape-rendering="geometricPrecision" />
+  </g>
+</svg>
