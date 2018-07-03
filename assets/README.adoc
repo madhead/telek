@@ -1,0 +1,3 @@
+= Assets
+
+Assets directory contains auxiliary non-code static content like logos.
