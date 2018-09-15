@@ -5,11 +5,35 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    id="telek"
    version="1.1"
    viewBox="0 0 135.46667 135.46667"
    height="512"
-   width="512">
+   width="512"
+   sodipodi:docname="logo.svg"
+   inkscape:version="0.92.2 2405546, 2018-03-11">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="999"
+     id="namedview36"
+     showgrid="false"
+     inkscape:zoom="1.3037281"
+     inkscape:cx="477.55905"
+     inkscape:cy="255.68809"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="telek" />
   <metadata
      id="metadata1042">
     <rdf:RDF>
@@ -26,15 +50,15 @@
      id="definitions">
     <linearGradient
        id="sky-gradient"
-       x1="160.008"
-       y1="40.007999"
-       y2="180"
-       x2="100.008"
-       gradientTransform="matrix(0.22302439,0,0,0.39648781,41.143872,20.105236)"
+       x1="175.29535"
+       y1="3.7687721"
+       y2="211.93965"
+       x2="85.812599"
+       gradientTransform="matrix(0.18585364,0,0,0.33040647,45.575446,28.043248)"
        gradientUnits="userSpaceOnUse">
       <stop
          id="sky-gradient-stop-1"
-         offset="0.1183"
+         offset="0.09048372"
          stop-color="#0095D5" />
       <stop
          id="sky-gradient-stop-2"
@@ -51,12 +75,12 @@
     </linearGradient>
     <linearGradient
        id="cabin-in-gradient"
-       x1="180.33203"
-       y1="229.79492"
-       x2="236.58182"
-       y2="287.94907"
+       x1="207.18568"
+       y1="299.86618"
+       x2="208.79228"
+       y2="207.22813"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.48367311,0,0,0.48367311,-46.464638,-43.010606)">
+       gradientTransform="matrix(0.48367311,0,0,0.48367311,-41.17298,-48.302282)">
       <stop
          id="cabin-in-gradient-stop-1"
          offset="0.1768"
@@ -89,7 +113,7 @@
        x2="216.28711"
        y2="275.83105"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.48367311,0,0,0.48367311,-46.464638,-43.010606)">
+       gradientTransform="matrix(0.48367311,0,0,0.48367311,-41.17298,-48.302282)">
       <stop
          id="cabin-out-gradient-stop-1"
          offset="0.1768"
@@ -117,62 +141,43 @@
     </linearGradient>
     <linearGradient
        id="paper-plane-top-gradient"
-       x1="-75.477264"
-       y1="317.06802"
-       x2="153.53609"
-       y2="84.407501"
-       gradientTransform="matrix(0.52812656,0,0,0.44296136,7.2230739,11.644453)"
+       x1="82.073784"
+       y1="194.74144"
+       x2="165.83275"
+       y2="63.332508"
+       gradientTransform="matrix(0.52812656,0,0,0.44296136,12.514732,6.352777)"
        gradientUnits="userSpaceOnUse">
       <stop
          id="paper-plane-top-gradient-stop-1"
-         offset="0.1768"
+         offset="0.26768407"
          stop-color="#F88909" />
       <stop
-         id="paper-plane-top-gradient-stop-2"
-         offset="0.2570"
-         stop-color="#F58613" />
-      <stop
-         id="paper-plane-top-gradient-stop-3"
-         offset="0.3952"
-         stop-color="#EE7E2F" />
-      <stop
-         id="paper-plane-top-gradient-stop-4"
-         offset="0.5746"
-         stop-color="#E1725C" />
-      <stop
-         id="paper-plane-top-gradient-stop-5"
-         offset="0.7862"
-         stop-color="#D0609A" />
-      <stop
          id="paper-plane-top-gradient-stop-6"
-         offset="0.8925"
+         offset="0.9345817"
          stop-color="#C757BC" />
     </linearGradient>
   </defs>
   <rect
      id="sky"
-     fill="url(#sky-gradient)"
-     x="16.933336"
-     y="16.933336"
-     ry="6.742651"
-     height="101.60001"
-     width="101.60001" />
-  <g
-     id="plane">
-    <path
-       id="cabin-in"
-       fill="url(#cabin-in-gradient)"
-       d="m 82.275543,56.09326 c -0.420375,-0.0059 -0.989605,0.145996 -1.577606,0.502565 l -33.215685,20.95476 -0.0019,-9.67e-4 4.933089,16.237056 c 0.648567,1.790389 0.329299,2.500576 2.209636,2.500576 L 62.16532,86.33511 55.60928,81.491767 82.523991,57.204194 c 0.738235,-0.655193 0.452167,-1.101174 -0.248448,-1.110934 z"
-       shape-rendering="geometricPrecision" />
-    <path
-       id="cabin-out"
-       fill="url(#cabin-out-gradient)"
-       d="m 55.611172,81.49271 -0.98813,14.79454 c 1.451019,0 2.092118,-0.6636 2.902039,-1.45102 l 6.97075,-6.778978 z"
-       shape-rendering="geometricPrecision" />
-    <path
-       id="paper-plane-top"
-       fill="url(#paper-plane-top-gradient)"
-       d="m 55.609733,81.491684 23.390431,17.281155 c 2.669144,1.472741 4.595568,0.710227 5.260432,-2.478098 l 9.521099,-44.866968 c 0.974793,-3.908175 -1.489756,-5.68074 -4.04322,-4.521473 L 33.830697,68.464094 c -3.816231,1.530681 -3.793966,3.65976 -0.695612,4.608437 l 14.347203,4.477991 33.215281,-20.955137 c 1.568015,-0.950852 3.007133,-0.439653 1.825953,0.608655"
-       shape-rendering="geometricPrecision" />
-  </g>
+     x="25.4"
+     y="25.4"
+     ry="5.618875"
+     height="84.666672"
+     width="84.666672"
+     style="fill:url(#sky-gradient);stroke-width:0.83333325" />
+  <path
+     inkscape:connector-curvature="0"
+     style="fill:url(#cabin-in-gradient);shape-rendering:geometricPrecision"
+     d="m 87.567201,50.801584 c -0.420375,-0.0059 -0.989605,0.145996 -1.577606,0.502565 l -33.215685,20.95476 -0.0019,-9.67e-4 4.933089,16.237056 c 0.648567,1.790389 0.329299,2.500576 2.209636,2.500576 l 7.542243,-9.95214 -6.55604,-4.843343 26.914711,-24.287573 c 0.738235,-0.655193 0.452167,-1.101174 -0.248448,-1.110934 z"
+     id="cabin-in" />
+  <path
+     inkscape:connector-curvature="0"
+     style="fill:url(#cabin-out-gradient);shape-rendering:geometricPrecision"
+     d="m 60.90283,76.201034 -0.98813,14.79454 c 1.451019,0 2.092118,-0.6636 2.902039,-1.45102 l 6.97075,-6.778978 z"
+     id="cabin-out" />
+  <path
+     inkscape:connector-curvature="0"
+     style="fill:url(#paper-plane-top-gradient);shape-rendering:geometricPrecision"
+     d="m 60.901391,76.200008 23.390431,17.281155 c 2.669144,1.472741 4.595568,0.710227 5.260432,-2.478098 l 9.521099,-44.866968 c 0.974797,-3.908175 -1.489756,-5.68074 -4.04322,-4.521473 L 39.122355,63.172418 c -3.816231,1.530681 -3.793966,3.65976 -0.695612,4.608437 l 14.347203,4.477991 33.215281,-20.955137 c 1.568015,-0.950852 3.007133,-0.439653 1.825953,0.608655"
+     id="paper-plane-top" />
 </svg>
