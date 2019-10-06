@@ -26,13 +26,12 @@ tasks {
                 "${rootProject.projectDir}" to "/build"
             )
         )
-        // FIXME: Not sure what to do with other OSes
         if (OperatingSystem.current().isUnix) {
             user.set(
                 "ug"
                     .map {
                         Runtime.getRuntime().exec("id -$it").let {
-                            it.waitFor(5, TimeUnit.SECONDS)
+                            it.waitFor(@Suppress("MagicNumber") 5, TimeUnit.SECONDS)
                             if (it.exitValue() != 0) {
                                 throw GradleException("Failed to get current user details")
                             }

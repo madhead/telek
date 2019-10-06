@@ -5,6 +5,7 @@ stages:
 logo:
   stage: Test
   image: madhead/imagemagick
+  dependencies: []
   script:
     - convert -background none -density 300 -resize 128x128 assets/src/logo.svg logo.check.png
     - magick compare -verbose -metric ae logo.png logo.check.png diff.png
@@ -25,3 +26,17 @@ gradle-version:
     - echo $gradle_version
     - echo $latest_gradle_version
     - '[[ $gradle_version == $latest_gradle_version ]]'
+
+ktlint:
+  stage: Test
+  image: openjdk:13
+  dependencies: []
+  script:
+    - ./gradlew ktlintCheck
+
+detekt:
+  stage: Test
+  image: openjdk:13
+  dependencies: []
+  script:
+    - ./gradlew :detekt
