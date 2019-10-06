@@ -6,4 +6,8 @@ object Versions {
         const val DETEKT = "1.1.0"
         const val DOCKER = "5.2.0"
     }
+
+    object Dependencies {
+        const val DETEKT = Plugins.DETEKT
+    }
 }
