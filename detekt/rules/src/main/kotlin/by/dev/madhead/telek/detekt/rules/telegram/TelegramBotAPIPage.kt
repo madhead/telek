@@ -17,7 +17,8 @@ object TelegramBotAPIPage {
     }
 
     @Suppress("ThrowsCount", "ReturnCount")
-    fun typeDocumentation(type: String): TelegramBotAPITypeDocumentation? {
+    fun typeDocumentation(type: String?): TelegramBotAPITypeDocumentation? {
+        if (type == null) return null
         val anchor = dom.selectFirst("a[name='$type']") ?: return null
         val header = anchor.parent() ?: return null
         val fieldsTable = header.nextElementSiblings().first { it.tagName() == "table" } ?: return null

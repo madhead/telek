@@ -1,7 +1,7 @@
 package by.dev.madhead.telek.detekt.rules
 
 import by.dev.madhead.telek.detekt.rules.rules.TelegramBotAPITypeMustBeADataClass
-import by.dev.madhead.telek.detekt.rules.rules.TelegramBotAPITypeMustExhaustive
+import by.dev.madhead.telek.detekt.rules.rules.TelegramBotAPITypeMustBeExhaustive
 import io.gitlab.arturbosch.detekt.api.Config
 import io.gitlab.arturbosch.detekt.api.RuleSet
 import io.gitlab.arturbosch.detekt.api.RuleSetProvider
@@ -16,7 +16,7 @@ class TelegramBotAPIRules : RuleSetProvider {
         ruleSetId,
         listOf(
             TelegramBotAPITypeMustBeADataClass(config),
-            TelegramBotAPITypeMustExhaustive(config)
+            TelegramBotAPITypeMustBeExhaustive(config)
         )
     )
 }

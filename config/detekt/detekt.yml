@@ -12,7 +12,7 @@ console-reports:
 telegram-bot-api:
   TelegramBotAPITypeMustBeADataClass:
     active: true
-  TelegramBotAPITypeMustExhaustive:
+  TelegramBotAPITypeMustBeExhaustive:
     active: true
 
 comments:
