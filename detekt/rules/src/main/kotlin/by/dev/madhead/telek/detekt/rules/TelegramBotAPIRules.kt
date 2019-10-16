@@ -2,6 +2,9 @@ package by.dev.madhead.telek.detekt.rules
 
 import by.dev.madhead.telek.detekt.rules.rules.TelegramBotAPITypeMustBeADataClass
 import by.dev.madhead.telek.detekt.rules.rules.TelegramBotAPITypeMustBeExhaustive
+import by.dev.madhead.telek.detekt.rules.rules.TelegramBotAPITypeMustBeNamedProperly
+import by.dev.madhead.telek.detekt.rules.rules.TelegramBotAPITypeMustBeSerializable
+import by.dev.madhead.telek.detekt.rules.rules.TelegramBotAPITypePropertiesMustHaveCorrectNullability
 import io.gitlab.arturbosch.detekt.api.Config
 import io.gitlab.arturbosch.detekt.api.RuleSet
 import io.gitlab.arturbosch.detekt.api.RuleSetProvider
@@ -16,7 +19,10 @@ class TelegramBotAPIRules : RuleSetProvider {
         ruleSetId,
         listOf(
             TelegramBotAPITypeMustBeADataClass(config),
-            TelegramBotAPITypeMustBeExhaustive(config)
+            TelegramBotAPITypeMustBeExhaustive(config),
+            TelegramBotAPITypeMustBeSerializable(config),
+            TelegramBotAPITypeMustBeNamedProperly(config),
+            TelegramBotAPITypePropertiesMustHaveCorrectNullability(config)
         )
     )
 }

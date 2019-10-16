@@ -17,23 +17,21 @@ class TelegramBotAPITypeMustBeADataClass(config: Config = Config.empty) : Rule(c
         get() = Issue(
             javaClass.simpleName,
             Severity.Defect,
-            "Telegram Bot API type must be a data class.",
-            Debt.TEN_MINS
+            "Telegram Bot API types must be data classes.",
+            Debt.FIVE_MINS
         )
 
     override fun visitClass(klass: KtClass) {
         super.visitClass(klass)
 
-        if (klass.isTelegramBotAPIType()) {
-            if (!klass.isData()) {
-                report(
-                    CodeSmell(
-                        issue,
-                        Entity.from(klass),
-                        issue.description
-                    )
+        if (klass.isTelegramBotAPIType() && !klass.isData()) {
+            report(
+                CodeSmell(
+                    issue,
+                    Entity.from(klass),
+                    "${klass.name} must be a data class."
                 )
-            }
+            )
         }
     }
 }

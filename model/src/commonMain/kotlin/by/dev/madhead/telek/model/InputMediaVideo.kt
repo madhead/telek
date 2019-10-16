@@ -2,7 +2,12 @@ package by.dev.madhead.telek.model
 
 import by.dev.madhead.telek.detekt.annotations.TelegramBotAPIType
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+/**
+ * Represents a video to be sent.
+ */
+@Serializable
 @TelegramBotAPIType(type = "inputmediavideo")
 data class InputMediaVideo(
     @SerialName("type")
@@ -12,23 +17,23 @@ data class InputMediaVideo(
     val media: String,
 
     @SerialName("thumb")
-    val thumb: Any,
+    val thumb: Any? = null,
 
     @SerialName("caption")
-    val caption: String,
+    val caption: String? = null,
 
     @SerialName("parse_mode")
-    val parseMode: String,
+    val parseMode: String? = null,
 
     @SerialName("width")
-    val width: Int,
+    val width: Int? = null,
 
     @SerialName("height")
-    val height: Int,
+    val height: Int? = null,
 
     @SerialName("duration")
-    val duration: Int,
+    val duration: Int? = null,
 
     @SerialName("supports_streaming")
-    val supportsStreaming: Boolean
+    val supportsStreaming: Boolean? = null
 ) : InputMedia

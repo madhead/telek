@@ -10,8 +10,14 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(kotlin("stdlib"))
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:0.13.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:${Versions.Dependencies.KOTLINX_SERIALIZATION}")
                 compileOnly(project(":detekt:annotations"))
+            }
+        }
+        val jvmMain by getting {
+            dependencies {
+                implementation(kotlin("stdlib-jdk8"))
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:${Versions.Dependencies.KOTLINX_SERIALIZATION}")
             }
         }
     }

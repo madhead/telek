@@ -2,10 +2,12 @@ package by.dev.madhead.telek.model
 
 import by.dev.madhead.telek.detekt.annotations.TelegramBotAPIType
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 /**
  * This object represents a phone contact.
  */
+@Serializable
 @TelegramBotAPIType(type = "contact")
 data class Contact(
     @SerialName("phone_number")

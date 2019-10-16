@@ -2,10 +2,12 @@ package by.dev.madhead.telek.model
 
 import by.dev.madhead.telek.detekt.annotations.TelegramBotAPIType
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 /**
  * Describes actions that a non-administrator user is allowed to take in a chat.
  */
+@Serializable
 @TelegramBotAPIType(type = "chatpermissions")
 data class ChatPermissions(
     @SerialName("can_send_messages")

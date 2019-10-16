@@ -2,7 +2,12 @@ package by.dev.madhead.telek.model
 
 import by.dev.madhead.telek.detekt.annotations.TelegramBotAPIType
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+/**
+ * Contains information about documents or other Telegram Passport elements shared with the bot by the user.
+ */
+@Serializable
 @TelegramBotAPIType(type = "encryptedpassportelement")
 data class EncryptedPassportElement(
     @SerialName("type")

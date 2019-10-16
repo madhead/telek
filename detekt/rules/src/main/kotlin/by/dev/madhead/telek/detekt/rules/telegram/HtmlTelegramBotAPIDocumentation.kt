@@ -1,23 +1,16 @@
 package by.dev.madhead.telek.detekt.rules.telegram
 
-import org.jsoup.Jsoup
-import java.net.URL
+import org.jsoup.nodes.Document
 
 /**
- * [Telegram Bot API][https://core.telegram.org/bots/api] documentation parser.
+ * [Telegram Bot API][TelegramBotAPITypeDocumentation] documentation provider who is able to parse
+ * [the official HTML documentation][https://core.telegram.org/bots/api].
  */
-object TelegramBotAPIPage {
-    private const val TIMEOUT = 10_000
-
-    private val dom by lazy {
-        Jsoup.parse(
-            URL("https://core.telegram.org/bots/api"),
-            TIMEOUT
-        )
-    }
+interface HtmlTelegramBotAPIDocumentation : TelegramBotAPIDocumentation {
+    val dom: Document
 
     @Suppress("ThrowsCount", "ReturnCount")
-    fun typeDocumentation(type: String?): TelegramBotAPITypeDocumentation? {
+    override fun forType(type: String?): TelegramBotAPITypeDocumentation? {
         if (type == null) return null
         val anchor = dom.selectFirst("a[name='$type']") ?: return null
         val header = anchor.parent() ?: return null

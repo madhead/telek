@@ -13,14 +13,13 @@ tasks {
     val updateProjectLogo by creating
 
     val pullImage by creating(DockerPullImage::class) {
-        repository.set("madhead/imagemagick")
-        tag.set("latest")
+        image.set("madhead/imagemagick:latest")
     }
 
     val createContainer by creating(DockerCreateContainer::class) {
         dependsOn(pullImage)
-        targetImageId { pullImage.imageId.get() }
-        binds.set(
+        targetImageId { pullImage.image.get() }
+        hostConfig.binds.set(
             mapOf(
                 "$projectDir/src" to "/src",
                 "${rootProject.projectDir}" to "/build"

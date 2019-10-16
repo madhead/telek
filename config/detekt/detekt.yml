@@ -1,3 +1,7 @@
+config:
+  validation: true
+  excludes: "telegram-bot-api"
+
 build:
   maxIssues: 0
 
@@ -13,6 +17,12 @@ telegram-bot-api:
   TelegramBotAPITypeMustBeADataClass:
     active: true
   TelegramBotAPITypeMustBeExhaustive:
+    active: true
+  TelegramBotAPITypeMustBeSerializable:
+    active: true
+  TelegramBotAPITypeMustBeNamedProperly:
+    active: true
+  TelegramBotAPITypePropertiesMustHaveCorrectNullability:
     active: true
 
 comments:
@@ -45,7 +55,7 @@ complexity:
     includeStaticDeclarations: false
   ComplexMethod:
     active: true
-    threshold: 10
+    threshold: 15
     ignoreSingleWhenExpression: false
     ignoreSimpleWhenEntries: false
   LabeledExpression:
@@ -105,7 +115,7 @@ empty-blocks:
     active: true
   EmptyFunctionBlock:
     active: true
-    ignoreOverriddenFunctions: false
+    ignoreOverridden: false
   EmptyIfBlock:
     active: true
   EmptyInitBlock:
@@ -311,7 +321,7 @@ naming:
     excludes: "**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"
     parameterPattern: '[a-z][A-Za-z0-9]*'
     excludeClassPattern: '$^'
-    ignoreOverriddenFunctions: true
+    ignoreOverridden: true
   InvalidPackageDeclaration:
     active: false
     rootPackage: ''
@@ -319,7 +329,7 @@ naming:
     active: true
   MemberNameEqualsClassName:
     active: false
-    ignoreOverriddenFunction: true
+    ignoreOverridden: true
   ObjectPropertyNaming:
     active: true
     excludes: "**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt"

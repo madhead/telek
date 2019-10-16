@@ -2,10 +2,12 @@ package by.dev.madhead.telek.model
 
 import by.dev.madhead.telek.detekt.annotations.TelegramBotAPIType
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 /**
  * This object represents a chat.
  */
+@Serializable
 @TelegramBotAPIType(type = "chat")
 data class Chat(
     @SerialName("id")
@@ -40,6 +42,9 @@ data class Chat(
 
     @SerialName("permissions")
     val permissions: ChatPermissions? = null,
+
+    @SerialName("slow_mode_delay")
+    val slowModeDelay: Int? = null,
 
     @SerialName("sticker_set_name")
     val stickerSetName: String? = null,

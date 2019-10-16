@@ -2,7 +2,12 @@ package by.dev.madhead.telek.model
 
 import by.dev.madhead.telek.detekt.annotations.TelegramBotAPIType
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+/**
+ * Represents a general file to be sent.
+ */
+@Serializable
 @TelegramBotAPIType(type = "inputmediadocument")
 data class InputMediaDocument(
     @SerialName("type")
@@ -12,11 +17,11 @@ data class InputMediaDocument(
     val media: String,
 
     @SerialName("thumb")
-    val thumb: Any,
+    val thumb: Any? = null,
 
     @SerialName("caption")
-    val caption: String,
+    val caption: String? = null,
 
     @SerialName("parse_mode")
-    val parseMode: String
+    val parseMode: String? = null
 ) : InputMedia

@@ -2,10 +2,12 @@ package by.dev.madhead.telek.model
 
 import by.dev.madhead.telek.detekt.annotations.TelegramBotAPIType
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 /**
  * This object contains information about one member of a chat.
  */
+@Serializable
 @TelegramBotAPIType(type = "chatmember")
 data class ChatMember(
     @SerialName("user")
@@ -13,6 +15,9 @@ data class ChatMember(
 
     @SerialName("status")
     val status: String,
+
+    @SerialName("custom_title")
+    val customTitle: String? = null,
 
     @SerialName("until_date")
     val untilDate: Int? = null,

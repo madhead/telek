@@ -2,6 +2,7 @@ package by.dev.madhead.telek.model
 
 import by.dev.madhead.telek.detekt.annotations.TelegramBotAPIType
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 /**
  * This object represents an incoming callback query from a callback button in an
@@ -10,6 +11,7 @@ import kotlinx.serialization.SerialName
  * (in [inline mode][https://core.telegram.org/bots/api#inline-mode]), the field _inline_message_id_ will be present. Exactly one of the
  * fields _data_ or _game_short_name_ will be present.
  */
+@Serializable
 @TelegramBotAPIType(type = "callbackquery")
 data class CallbackQuery(
     @SerialName("id")

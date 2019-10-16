@@ -2,7 +2,13 @@ package by.dev.madhead.telek.model
 
 import by.dev.madhead.telek.detekt.annotations.TelegramBotAPIType
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+/**
+ * This object represents an incoming inline query.
+ * When the user sends an empty query, your bot could return some default or trending results.
+ */
+@Serializable
 @TelegramBotAPIType(type = "inlinequery")
 data class InlineQuery(
     @SerialName("id")
@@ -12,7 +18,7 @@ data class InlineQuery(
     val from: User,
 
     @SerialName("location")
-    val location: Location,
+    val location: Location? = null,
 
     @SerialName("query")
     val query: String,
