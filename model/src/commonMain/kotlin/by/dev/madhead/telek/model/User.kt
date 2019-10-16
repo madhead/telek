@@ -1,8 +1,13 @@
 package by.dev.madhead.telek.model
 
-import by.dev.madhead.telek.detekt.annotations.TelegramAPIType
+import by.dev.madhead.telek.detekt.annotations.TelegramBotAPIType
+import kotlinx.serialization.SerialName
 
-@TelegramAPIType(anchor = "user")
+@TelegramBotAPIType(type = "user")
 data class User(
-    val id: String
+    @SerialName("id")
+    val id: String,
+
+    @SerialName("is_bot")
+    val isBot: Boolean
 )

@@ -35,3 +35,9 @@ allprojects {
         input = files(projectDir)
     }
 }
+
+dependencies {
+    val detektPlugins by configurations
+
+    detektPlugins(project(":detekt:rules"))
+}

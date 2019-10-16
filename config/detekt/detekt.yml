@@ -1,5 +1,5 @@
 build:
-  maxIssues: 10
+  maxIssues: 0
 
 processors:
   active: true
@@ -9,8 +9,10 @@ processors:
 console-reports:
   active: true
 
-telegram-api:
-  TelegramAPIFields:
+telegram-bot-api:
+  TelegramBotAPITypeMustBeADataClass:
+    active: true
+  TelegramBotAPITypeMustExhaustive:
     active: true
 
 comments:
@@ -30,7 +32,7 @@ comments:
     searchInInnerObject: true
     searchInInnerInterface: true
   UndocumentedPublicFunction:
-    active: false
+    active: true
 
 complexity:
   active: true
@@ -196,7 +198,7 @@ formatting:
     continuationIndentSize: 4
   MaximumLineLength:
     active: true
-    maxLineLength: 120
+    maxLineLength: 140
   ModifierOrdering:
     active: true
     autoCorrect: true
@@ -461,7 +463,7 @@ style:
     active: false
   MaxLineLength:
     active: true
-    maxLineLength: 120
+    maxLineLength: 140
     excludePackageStatements: true
     excludeImportStatements: true
     excludeCommentStatements: false
@@ -495,7 +497,7 @@ style:
     excludedFunctions: "equals"
     excludeLabeled: false
     excludeReturnFromLambda: true
-    excludeGuardClauses: false
+    excludeGuardClauses: true
   SafeCast:
     active: true
   SerialVersionUIDInSerializableClass:
