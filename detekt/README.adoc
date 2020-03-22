@@ -1,0 +1,6 @@
+= detekt
+
+Telek relies on some custom https://arturbosch.github.io/detekt[detekt] rules.
+These rules helps to:
+
+. Keep the link:../model[model] up-to-date with the https://core.telegram.org/bots/api[Telegram Bot API documentation].
