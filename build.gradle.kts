@@ -35,6 +35,21 @@ allprojects {
         buildUponDefaultConfig = false
         input = files(projectDir)
     }
+
+    afterEvaluate {
+        if (plugins.hasPlugin("maven-publish")) {
+            configure<PublishingExtension> {
+                repositories {
+                    maven("https://api.bintray.com/maven/madhead/maven/${project.group}:${project.name}/;publish=0;override=1") {
+                        credentials {
+                            username = System.getenv("BINTRAY_USER")
+                            password = System.getenv("BINTRAY_KEY")
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 dependencies {
