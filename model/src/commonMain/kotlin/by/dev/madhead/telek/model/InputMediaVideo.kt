@@ -1,6 +1,7 @@
 package by.dev.madhead.telek.model
 
 import by.dev.madhead.telek.detekt.annotations.TelegramBotAPIType
+import kotlinx.serialization.ContextualSerialization
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -17,6 +18,7 @@ data class InputMediaVideo(
     val media: String,
 
     @SerialName("thumb")
+    @ContextualSerialization
     val thumb: Any? = null,
 
     @SerialName("caption")

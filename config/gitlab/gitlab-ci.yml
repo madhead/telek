@@ -1,5 +1,6 @@
 stages:
   - Test
+  - Publish
 
 # Check if logo.png in the root of the repo corresponds to the content of assets/src/logo.svg.
 logo:
@@ -40,3 +41,12 @@ detekt:
   dependencies: []
   script:
     - ./gradlew :detekt
+
+bintray:
+  stage: Publish
+  image: openjdk:8
+  script:
+    - ./gradlew publish
+  only:
+    - master
+  dependencies: []
