@@ -23,6 +23,7 @@ allprojects {
 
     configure<KtlintExtension> {
         verbose.set(true)
+        disabledRules.add("import-ordering")
         reporters {
             reporter(ReporterType.PLAIN)
             reporter(ReporterType.CHECKSTYLE)

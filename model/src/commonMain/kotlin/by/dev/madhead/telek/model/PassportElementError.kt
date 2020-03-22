@@ -14,6 +14,6 @@ package by.dev.madhead.telek.model
  * - [PassportElementErrorTranslationFiles]
  * - [PassportElementErrorUnspecified]
  */
-//@Serializable
-//@TelegramBotAPIType(type = "passportelementerror")
+// @Serializable
+// @TelegramBotAPIType(type = "passportelementerror")
 interface PassportElementError
