@@ -22,9 +22,9 @@ interface HtmlTelegramBotAPIDocumentation : TelegramBotAPIDocumentation {
                 .select("tbody>tr")
                 ?.map {
                     TelegramBotAPITypeDocumentationField(
-                        name = it.select("td")?.get(0)?.text() ?: throw IllegalArgumentException("Unsupported documentation format"),
-                        type = it.select("td")?.get(1)?.text() ?: throw IllegalArgumentException("Unsupported documentation format"),
-                        description = it.select("td")?.get(2)?.text() ?: throw IllegalArgumentException("Unsupported documentation format")
+                        name = it.select("td")?.get(0)?.text() ?: throw IllegalArgumentException("Unsupported documentation format."),
+                        type = it.select("td")?.get(1)?.text() ?: throw IllegalArgumentException("Unsupported documentation format."),
+                        description = it.select("td")?.get(2)?.text() ?: throw IllegalArgumentException("Unsupported documentation format.")
                     )
                 } ?: emptyList()
         )

@@ -17,4 +17,4 @@ data class ReplyKeyboardRemove(
 
     @SerialName("selective")
     val selective: Boolean? = null
-)
+) : ReplyMarkup

@@ -128,10 +128,10 @@ data class Message(
     val channelChatCreated: Boolean? = null,
 
     @SerialName("migrate_to_chat_id")
-    val migrateToChatId: Int? = null,
+    val migrateToChatId: Long? = null,
 
     @SerialName("migrate_from_chat_id")
-    val migrateFromChatId: Int? = null,
+    val migrateFromChatId: Long? = null,
 
     @SerialName("pinned_message")
     val pinnedMessage: Message? = null,

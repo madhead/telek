@@ -22,4 +22,4 @@ data class ReplyKeyboardMarkup(
 
     @SerialName("selective")
     val selective: Boolean? = null
-)
+) : ReplyMarkup

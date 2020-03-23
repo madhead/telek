@@ -17,4 +17,4 @@ data class ForceReply(
 
     @SerialName("selective")
     val selective: Boolean? = null
-)
+) : ReplyMarkup

@@ -25,7 +25,7 @@ data class InputMediaVideo(
     val caption: String? = null,
 
     @SerialName("parse_mode")
-    val parseMode: String? = null,
+    val parseMode: ParseMode? = null,
 
     @SerialName("width")
     val width: Int? = null,

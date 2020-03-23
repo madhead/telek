@@ -1,0 +1,3 @@
+= Telek HC
+
+Telek API implementation based on http://hc.apache.org[Apache HttpComponents].

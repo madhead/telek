@@ -25,7 +25,7 @@ data class InputMediaAudio(
     val caption: String? = null,
 
     @SerialName("parse_mode")
-    val parseMode: String? = null,
+    val parseMode: ParseMode? = null,
 
     @SerialName("duration")
     val duration: Int? = null,

@@ -1,8 +1,15 @@
 = Telek Changelog
 
 // tag::compact[]
+== 0.0.3 (2020-03-29)
+
+Partial Telek API implementation based on http://hc.apache.org[Apache HttpComponents].
+// end::compact[]
+
+== 0.0.2 (2020-03-22)
+
+No updates
+
 == 0.0.1 (2020-03-22)
 
 Initial version
-
-// end::compact[]

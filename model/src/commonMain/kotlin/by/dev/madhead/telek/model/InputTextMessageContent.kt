@@ -14,7 +14,7 @@ data class InputTextMessageContent(
     val messageText: String,
 
     @SerialName("parse_mode")
-    val parseMode: String? = null,
+    val parseMode: ParseMode? = null,
 
     @SerialName("disable_web_page_preview")
     val disableWebPagePreview: Boolean? = null
