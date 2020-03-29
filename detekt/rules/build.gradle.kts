@@ -1,7 +1,7 @@
 plugins {
     kotlin("jvm")
     id("com.github.johnrengelman.shadow").version(Versions.Plugins.SHADOW)
-    id("jacoco")
+    jacoco
 }
 
 dependencies {

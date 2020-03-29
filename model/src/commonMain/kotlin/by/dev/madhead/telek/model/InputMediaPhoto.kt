@@ -20,5 +20,5 @@ data class InputMediaPhoto(
     val caption: String? = null,
 
     @SerialName("parse_mode")
-    val parseMode: String? = null
+    val parseMode: ParseMode? = null
 ) : InputMedia

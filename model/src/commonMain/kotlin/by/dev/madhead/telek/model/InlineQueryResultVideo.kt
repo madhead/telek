@@ -34,7 +34,7 @@ data class InlineQueryResultVideo(
     val caption: String? = null,
 
     @SerialName("parse_mode")
-    val parseMode: String? = null,
+    val parseMode: ParseMode? = null,
 
     @SerialName("video_width")
     val videoWidth: Int? = null,

@@ -13,4 +13,4 @@ import kotlinx.serialization.Serializable
 data class InlineKeyboardMarkup(
     @SerialName("inline_keyboard")
     val inlineKeyboard: List<List<InlineKeyboardButton>>
-)
+) : ReplyMarkup

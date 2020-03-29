@@ -11,7 +11,7 @@ import kotlinx.serialization.Serializable
 @TelegramBotAPIType(type = "chat")
 data class Chat(
     @SerialName("id")
-    val id: Int,
+    val id: Long,
 
     @SerialName("type")
     val type: String,

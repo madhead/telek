@@ -1,3 +1,0 @@
-= Test
-
-Non-production playgrounds and tests.

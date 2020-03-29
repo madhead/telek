@@ -28,7 +28,7 @@ data class InlineQueryResultCachedVoice(
     val caption: String? = null,
 
     @SerialName("parse_mode")
-    val parseMode: String? = null,
+    val parseMode: ParseMode? = null,
 
     @SerialName("reply_markup")
     val replyMarkup: InlineKeyboardMarkup? = null,
