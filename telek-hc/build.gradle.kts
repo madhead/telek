@@ -1,6 +1,7 @@
 plugins {
     kotlin("jvm")
     jacoco
+    `maven-publish`
 }
 
 sourceSets {
@@ -49,6 +50,19 @@ dependencies {
     smokeRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
     smokeRuntimeOnly("org.apache.logging.log4j:log4j-core")
     smokeRuntimeOnly("org.apache.logging.log4j:log4j-jcl")
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+publishing {
+    publications {
+        val maven by creating(MavenPublication::class) {
+            from(components["java"])
+        }
+    }
 }
 
 tasks {
