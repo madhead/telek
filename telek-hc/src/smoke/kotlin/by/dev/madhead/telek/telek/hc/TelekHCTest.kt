@@ -6,6 +6,7 @@ import by.dev.madhead.telek.model.Message
 import by.dev.madhead.telek.model.ParseMode
 import by.dev.madhead.telek.model.communication.AnswerCallbackQueryRequest
 import by.dev.madhead.telek.model.communication.ChatId
+import by.dev.madhead.telek.model.communication.EditMessageReplyMarkupRequest
 import by.dev.madhead.telek.model.communication.FileIdInputFile
 import by.dev.madhead.telek.model.communication.GetUpdatesRequest
 import by.dev.madhead.telek.model.communication.InputFile
@@ -351,6 +352,66 @@ internal class TelekHCTest {
             ),
             caption = "[Photo](https://pixabay.com/photos/milky-way-starry-sky-night-sky-star-2695569) by local file",
             parseMode = ParseMode.MarkdownV2,
+            replyMarkup = verificationInlineKeyboard
+        )).verify()
+    }
+
+    @Test
+    @Order(18)
+    fun editMessageReplyMarkup() = runBlocking {
+        val message = telek.sendMessage(SendMessageRequest(
+            chatId = ChatId.of(qaUser),
+            text = "My reply markup will change several times"
+        ))
+        delay(1000)
+        telek.editMessageReplyMarkup(EditMessageReplyMarkupRequest(
+            chatId = ChatId.of(qaUser),
+            messageId = message.messageId,
+            replyMarkup = InlineKeyboardMarkup(listOf(
+                listOf(
+                    InlineKeyboardButton(text = "1", callbackData = "1"),
+                    InlineKeyboardButton(text = "2", callbackData = "2")
+                )
+            ))
+        ))
+        delay(1000)
+        telek.editMessageReplyMarkup(EditMessageReplyMarkupRequest(
+            chatId = ChatId.of(qaUser),
+            messageId = message.messageId,
+            replyMarkup = InlineKeyboardMarkup(listOf(
+                listOf(
+                    InlineKeyboardButton(text = "1", callbackData = "1"),
+                    InlineKeyboardButton(text = "2", callbackData = "2")
+                ),
+                listOf(
+                    InlineKeyboardButton(text = "3", callbackData = "3"),
+                    InlineKeyboardButton(text = "4", callbackData = "4")
+                )
+            ))
+        ))
+        delay(1000)
+        telek.editMessageReplyMarkup(EditMessageReplyMarkupRequest(
+            chatId = ChatId.of(qaUser),
+            messageId = message.messageId,
+            replyMarkup = InlineKeyboardMarkup(listOf(
+                listOf(
+                    InlineKeyboardButton(text = "1", callbackData = "1"),
+                    InlineKeyboardButton(text = "2", callbackData = "2"),
+                    InlineKeyboardButton(text = "3", callbackData = "3")
+                ),
+                listOf(
+                    InlineKeyboardButton(text = "4", callbackData = "4"),
+                    InlineKeyboardButton(text = "5", callbackData = "5")
+                ),
+                listOf(
+                    InlineKeyboardButton(text = "6", callbackData = "6")
+                )
+            ))
+        ))
+        delay(1000)
+        telek.sendMessage(SendMessageRequest(
+            chatId = ChatId.of(qaUser),
+            text = "Did the reply markup under the previous message changed?",
             replyMarkup = verificationInlineKeyboard
         )).verify()
     }

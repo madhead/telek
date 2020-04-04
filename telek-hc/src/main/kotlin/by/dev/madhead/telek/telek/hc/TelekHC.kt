@@ -10,8 +10,10 @@ import by.dev.madhead.telek.model.Update
 import by.dev.madhead.telek.model.User
 import by.dev.madhead.telek.model.WebhookInfo
 import by.dev.madhead.telek.model.communication.AnswerCallbackQueryRequest
+import by.dev.madhead.telek.model.communication.EditMessageReplyMarkupRequest
 import by.dev.madhead.telek.model.communication.GetUpdatesRequest
 import by.dev.madhead.telek.model.communication.InputFile
+import by.dev.madhead.telek.model.communication.MessageOrBoolean
 import by.dev.madhead.telek.model.communication.Response
 import by.dev.madhead.telek.model.communication.SendMessageRequest
 import by.dev.madhead.telek.model.communication.SendPhotoRequest
@@ -27,6 +29,8 @@ import kotlinx.serialization.builtins.list
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonConfiguration
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.modules.SerializersModule
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.client.methods.HttpPost
@@ -354,8 +358,26 @@ class TelekHC(private val token: String) : Telek, AutoCloseable {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
-    override suspend fun editMessageReplyMarkup() {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+    override suspend fun editMessageReplyMarkup(request: EditMessageReplyMarkupRequest): MessageOrBoolean {
+        val httpRequest = HttpPost().apply {
+            uri = methodURI("editMessageReplyMarkup")
+            entity = StringEntity(json.stringify(EditMessageReplyMarkupRequest.serializer(), request), ContentType.APPLICATION_JSON)
+        }
+
+        val httpResponse = client.exekute(httpRequest)
+        val response = withContext(Dispatchers.IO) { json.parse(Response.Companion, EntityUtils.toString(httpResponse.entity)) }
+
+        return if (response is Response.Successful) {
+            when (response.result) {
+                is JsonObject -> MessageOrBoolean.Message(json.fromJson(Message.serializer(), response.result))
+                is JsonPrimitive -> MessageOrBoolean.Boolean(json.fromJson(Boolean.serializer(), response.result))
+                else -> throw TelekException(response.description, response)
+            }
+        } else {
+            logger.error("${response.description}")
+
+            throw TelekException(response.description, response)
+        }
     }
 
     override suspend fun stopPoll() {

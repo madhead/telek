@@ -5,7 +5,9 @@ import by.dev.madhead.telek.model.Update
 import by.dev.madhead.telek.model.User
 import by.dev.madhead.telek.model.WebhookInfo
 import by.dev.madhead.telek.model.communication.AnswerCallbackQueryRequest
+import by.dev.madhead.telek.model.communication.EditMessageReplyMarkupRequest
 import by.dev.madhead.telek.model.communication.GetUpdatesRequest
+import by.dev.madhead.telek.model.communication.MessageOrBoolean
 import by.dev.madhead.telek.model.communication.SendMessageRequest
 import by.dev.madhead.telek.model.communication.SendPhotoRequest
 import by.dev.madhead.telek.model.communication.SetWebhookRequest
@@ -390,7 +392,7 @@ interface Telek {
      * Use this method to edit only the reply markup of messages.
      * On success, if edited message is sent by the bot, the edited [Message] is returned, otherwise *True* is returned.
      */
-    suspend fun editMessageReplyMarkup()
+    suspend fun editMessageReplyMarkup(request: EditMessageReplyMarkupRequest): MessageOrBoolean
 
     /**
      * Use this method to stop a poll which was sent by the bot.
