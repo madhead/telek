@@ -6,6 +6,7 @@ import by.dev.madhead.telek.model.User
 import by.dev.madhead.telek.model.WebhookInfo
 import by.dev.madhead.telek.model.communication.AnswerCallbackQueryRequest
 import by.dev.madhead.telek.model.communication.EditMessageReplyMarkupRequest
+import by.dev.madhead.telek.model.communication.ForwardMessageRequest
 import by.dev.madhead.telek.model.communication.GetUpdatesRequest
 import by.dev.madhead.telek.model.communication.MessageOrBoolean
 import by.dev.madhead.telek.model.communication.SendMessageRequest
@@ -31,14 +32,14 @@ interface Telek {
      * If you'd like to make sure that the Webhook request comes from Telegram, we recommend using a secret path in the URL, e.g.
      * `https://www.example.com/<token>`. Since nobody else knows your bot‘s token, you can be pretty sure it’s us.
      */
-    suspend fun setWebhook(request: SetWebhookRequest)
+    suspend fun setWebhook(request: SetWebhookRequest): Boolean
 
     /**
      * Use this method to remove webhook integration if you decide to switch back to [getUpdates].
      * Returns *True* on success.
      * Requires no parameters.
      */
-    suspend fun deleteWebhook()
+    suspend fun deleteWebhook(): Boolean
 
     /**
      * Use this method to get current webhook status.
@@ -65,7 +66,7 @@ interface Telek {
      * Use this method to forward messages of any kind.
      * On success, the sent [Message] is returned.
      */
-    suspend fun forwardMessage()
+    suspend fun forwardMessage(request: ForwardMessageRequest): Message
 
     /**
      * Use this method to send photos.

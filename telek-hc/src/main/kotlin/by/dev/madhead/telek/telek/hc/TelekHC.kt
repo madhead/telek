@@ -1,16 +1,13 @@
 package by.dev.madhead.telek.telek.hc
 
-import by.dev.madhead.telek.model.ForceReply
-import by.dev.madhead.telek.model.InlineKeyboardMarkup
 import by.dev.madhead.telek.model.Message
-import by.dev.madhead.telek.model.ReplyKeyboardMarkup
-import by.dev.madhead.telek.model.ReplyKeyboardRemove
 import by.dev.madhead.telek.model.ReplyMarkup
 import by.dev.madhead.telek.model.Update
 import by.dev.madhead.telek.model.User
 import by.dev.madhead.telek.model.WebhookInfo
 import by.dev.madhead.telek.model.communication.AnswerCallbackQueryRequest
 import by.dev.madhead.telek.model.communication.EditMessageReplyMarkupRequest
+import by.dev.madhead.telek.model.communication.ForwardMessageRequest
 import by.dev.madhead.telek.model.communication.GetUpdatesRequest
 import by.dev.madhead.telek.model.communication.InputFile
 import by.dev.madhead.telek.model.communication.MessageOrBoolean
@@ -18,6 +15,7 @@ import by.dev.madhead.telek.model.communication.Response
 import by.dev.madhead.telek.model.communication.SendMessageRequest
 import by.dev.madhead.telek.model.communication.SendPhotoRequest
 import by.dev.madhead.telek.model.communication.SetWebhookRequest
+import by.dev.madhead.telek.model.json
 import by.dev.madhead.telek.telek.Telek
 import by.dev.madhead.telek.telek.TelekException
 import kotlinx.coroutines.Dispatchers
@@ -27,11 +25,8 @@ import kotlinx.serialization.ImplicitReflectionSerializer
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.builtins.list
 import kotlinx.serialization.builtins.serializer
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonConfiguration
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
-import kotlinx.serialization.modules.SerializersModule
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.client.methods.HttpPost
 import org.apache.http.client.methods.HttpUriRequest
@@ -60,17 +55,6 @@ class TelekHC(private val token: String) : Telek, AutoCloseable {
     }
 
     private val client = HttpAsyncClients.createDefault()
-    private val json = Json(
-        configuration = JsonConfiguration.Stable.copy(encodeDefaults = false, ignoreUnknownKeys = true),
-        context = SerializersModule {
-            polymorphic(ReplyMarkup::class) {
-                ForceReply::class with ForceReply.serializer()
-                InlineKeyboardMarkup::class with InlineKeyboardMarkup.serializer()
-                ReplyKeyboardMarkup::class with ReplyKeyboardMarkup.serializer()
-                ReplyKeyboardRemove::class with ReplyKeyboardRemove.serializer()
-            }
-        }
-    )
 
     init {
         client.start()
@@ -85,12 +69,65 @@ class TelekHC(private val token: String) : Telek, AutoCloseable {
         return callApi(httpRequest, Update.serializer().list)
     }
 
-    override suspend fun setWebhook(request: SetWebhookRequest) {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+    override suspend fun setWebhook(request: SetWebhookRequest): Boolean {
+        val httpRequest = when (val certificate = request.certificate) {
+            is InputFile.StringInputFile -> HttpPost().apply {
+                uri = methodURI("setWebhook")
+                entity = StringEntity(json.stringify(SetWebhookRequest.serializer(), request), ContentType.APPLICATION_JSON)
+            }
+            else -> HttpPost().apply {
+                uri = methodURI("setWebhook")
+                entity = withContext(Dispatchers.IO) {
+                    BufferedHttpEntity(
+                        MultipartEntityBuilder.create().apply {
+                            addPart("url", StringBody(request.url, ContentType.MULTIPART_FORM_DATA))
+
+                            when (certificate) {
+                                is InputFile.FilePathInputFile -> {
+                                    val file = File(certificate.path)
+
+                                    addPart(
+                                        "certificate",
+                                        InputStreamBody(FileInputStream(file), ContentType.DEFAULT_BINARY, file.name)
+                                    )
+                                }
+                                is InputFile.BytesInputFile -> {
+                                    addPart(
+                                        "certificate",
+                                        InputStreamBody(
+                                            ByteArrayInputStream(certificate.bytes),
+                                            ContentType.DEFAULT_BINARY,
+                                            certificate.filename
+                                        )
+                                    )
+                                }
+                            }
+
+                            request.maxConnections?.let {
+                                addPart("max_connections", StringBody(it.toString(), ContentType.MULTIPART_FORM_DATA))
+                            }
+                            addPart(
+                                "allowed_updates",
+                                StringBody(
+                                    json.stringify(String.serializer().list, request.allowedUpdates),
+                                    ContentType.MULTIPART_FORM_DATA
+                                )
+                            )
+                        }.build()
+                    )
+                }
+            }
+        }
+
+        return callApi(httpRequest, Boolean.serializer())
     }
 
-    override suspend fun deleteWebhook() {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+    override suspend fun deleteWebhook(): Boolean {
+        val httpRequest = HttpPost().apply {
+            uri = methodURI("deleteWebhook")
+        }
+
+        return callApi(httpRequest, Boolean.serializer())
     }
 
     override suspend fun getWebhookInfo(): WebhookInfo {
@@ -118,8 +155,13 @@ class TelekHC(private val token: String) : Telek, AutoCloseable {
         return callApi(httpRequest, Message.serializer())
     }
 
-    override suspend fun forwardMessage() {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+    override suspend fun forwardMessage(request: ForwardMessageRequest): Message {
+        val httpRequest = HttpPost().apply {
+            uri = methodURI("forwardMessage")
+            entity = StringEntity(json.stringify(ForwardMessageRequest.serializer(), request), ContentType.APPLICATION_JSON)
+        }
+
+        return callApi(httpRequest, Message.serializer())
     }
 
     override suspend fun sendPhoto(request: SendPhotoRequest): Message {

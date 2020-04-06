@@ -11,8 +11,8 @@ data class SetWebhookRequest(
     @SerialName("url")
     val url: String,
 
-    @Suppress("ForbiddenComment") // TODO: file upload support
-    // val certificate: InputFile,
+    @SerialName("certificate")
+    val certificate: InputFile,
 
     @SerialName("max_connections")
     val maxConnections: Int? = 40,
