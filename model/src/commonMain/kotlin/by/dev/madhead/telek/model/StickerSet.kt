@@ -23,5 +23,8 @@ data class StickerSet(
     val containsMasks: Boolean,
 
     @SerialName("stickers")
-    val stickers: List<Sticker>
+    val stickers: List<Sticker>,
+
+    @SerialName("thumb")
+    val thumb: PhotoSize? = null
 )

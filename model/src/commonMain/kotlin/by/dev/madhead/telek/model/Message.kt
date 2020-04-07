@@ -103,6 +103,9 @@ data class Message(
     @SerialName("poll")
     val poll: Poll? = null,
 
+    @SerialName("dice")
+    val dice: Dice? = null,
+
     @SerialName("new_chat_members")
     val newChatMembers: List<User>? = null,
 

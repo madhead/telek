@@ -229,6 +229,10 @@ class TelekHC(private val token: String) : Telek, AutoCloseable {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
 
+    override suspend fun sendDice() {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun sendChatAction() {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
@@ -330,6 +334,14 @@ class TelekHC(private val token: String) : Telek, AutoCloseable {
         return callApi(httpRequest, Boolean.serializer())
     }
 
+    override suspend fun setMyCommands() {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getMyCommands() {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun editMessageText() {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
     }
@@ -380,6 +392,10 @@ class TelekHC(private val token: String) : Telek, AutoCloseable {
 
     override suspend fun deleteStickerFromSet() {
         TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun setStickerSetThumb() {
+        TODO("Not yet implemented")
     }
 
     override suspend fun answerInlineQuery() {
