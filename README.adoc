@@ -1,3 +1,11 @@
 = Telek
 
+image::assets/src/logo.svg[200, 200, role=text-center]
+
 Telek is a https://kotlinlang.org[Kotlin] library for https://core.telegram.org/bots/api[Telegram Bot API].
+
+== How do I use it?
+
+Read the https://madhead.gitlab.io/telek/user-guide[user guide] or the https://madhead.gitlab.io/telek/api-docs/telek[API docs].
+
+https://gitlab.com/madhead/telek/issues/new[Submit an issue] in case of any questions, problems, proposals or requests.
