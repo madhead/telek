@@ -1,0 +1,97 @@
+== Dependency Metadata
+
+Artifacts are deployed to https://bintray.com/bintray/jcenter[JCenter].
+
+* *Group ID*: `by.dev.madhead.telek`
+* *Version*: `{revnumber}`
+* *Artifacts*:
+** `model`
++
+https://core.telegram.org/bots/api#available-types[Telegram Bot API] types and pre-configured https://github.com/Kotlin/kotlinx.serialization[JSON codec].
+** `telek`
++
+Telek API.
+** `telek-hc`
++
+Telek API implementation based on http://hc.apache.org[Apache HttpComponents].
+
+=== Gradle
+
+[source,kotlin,subs=attributes+]
+----
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation("by.dev.madhead.telek:model:{revnumber}")
+    implementation("by.dev.madhead.telek:telek:{revnumber}")
+    implementation("by.dev.madhead.telek:telek-hc:{revnumber}")
+}
+----
+
+=== Maven
+
+Better use <<Gradle>>.
+
+JCenter repository must be added.
+They recommend to use `settings.xml` for that:
+
+.settings.xml
+[source,xml,subs=attributes+]
+----
+<settings>
+    <profiles>
+        <profile>
+            <repositories>
+                <repository>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                    <id>central</id>
+                    <name>bintray</name>
+                    <url>https://jcenter.bintray.com</url>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                    <id>central</id>
+                    <name>bintray-plugins</name>
+                    <url>https://jcenter.bintray.com</url>
+                </pluginRepository>
+            </pluginRepositories>
+            <id>bintray</id>
+        </profile>
+    </profiles>
+    <activeProfiles>
+        <activeProfile>bintray</activeProfile>
+    </activeProfiles>
+</settings>
+----
+
+Then specify the dependencies you need as usual:
+
+.pom.xml
+[source,xml,subs=attributes+]
+----
+<dependencies>
+    <dependency>
+        <groupId>by.dev.madhead.telek</groupId>
+        <artifactId>model</artifactId>
+        <version>{revnumber}</version>
+    </dependency>
+    <dependency>
+        <groupId>by.dev.madhead.telek</groupId>
+        <artifactId>telek</artifactId>
+        <version>{revnumber}</version>
+    </dependency>
+    <dependency>
+        <groupId>by.dev.madhead.telek</groupId>
+        <artifactId>telek-hc</artifactId>
+        <version>{revnumber}</version>
+    </dependency>
+</dependencies>
+----

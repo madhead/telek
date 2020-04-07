@@ -161,6 +161,12 @@ interface Telek {
     suspend fun sendPoll()
 
     /**
+     * Use this method to send a dice, which will have a random value from 1 to 6. On success, the sent [Message] is returned.
+     * (Yes, we're aware of the *“proper”* singular of *die*. But it's awkward, and we decided to help it change. One dice at a time!)
+     */
+    suspend fun sendDice()
+
+    /**
      * Use this method when you need to tell the user that something is happening on the bot's side.
      * The status is set for 5 seconds or less (when a message arrives from your bot, Telegram clients clear its typing status).
      * Returns *True* on success.
@@ -346,6 +352,19 @@ interface Telek {
     suspend fun answerCallbackQuery(request: AnswerCallbackQueryRequest): Boolean
 
     /**
+     * Use this method to change the list of the bot's commands.
+     * Returns *True* on success.
+     */
+    suspend fun setMyCommands()
+
+    /**
+     * Use this method to get the current list of the bot's commands.
+     * Requires no parameters.
+     * Returns Array of [BotCommand] on success.
+     */
+    suspend fun getMyCommands()
+
+    /**
      * Use this method to edit text and [game][https://core.telegram.org/bots/api#games] messages.
      * On success, if edited message is sent by the bot, the edited [Message] is returned, otherwise *True* is returned.
      */
@@ -434,6 +453,13 @@ interface Telek {
      * Returns *True* on success.
      */
     suspend fun deleteStickerFromSet()
+
+    /**
+     * Use this method to set the thumbnail of a sticker set.
+     * Animated thumbnails can be set for animated sticker sets only.
+     * Returns *True* on success.
+     */
+    suspend fun setStickerSetThumb()
 
     /**
      * Use this method to send answers to an inline query.

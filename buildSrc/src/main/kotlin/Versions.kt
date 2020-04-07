@@ -6,6 +6,8 @@ object Versions {
         const val DETEKT = "1.7.0"
         const val DOCKER = "6.3.0"
         const val SHADOW = "5.2.0"
+        const val DOKKA = "0.10.1"
+        const val ASCIIDOCTOR = "3.1.0"
     }
 
     object Dependencies {

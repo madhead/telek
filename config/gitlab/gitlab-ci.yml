@@ -120,6 +120,21 @@ bintray:
   image: openjdk:8
   script:
     - ./gradlew publish
-#  only:
-#    - master
+  only:
+    - master
   dependencies: []
+
+pages:
+  stage: Publish
+  image: openjdk:8
+  script:
+    - ./gradlew clean :docs:asciidoctor :dokka
+    - mkdir public
+    - cp -r docs/build/docs/asciidoc public/user-guide
+    - cp -r build/dokka public/api-docs
+  only:
+    - master
+  dependencies: []
+  artifacts:
+    paths:
+      - public

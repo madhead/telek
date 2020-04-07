@@ -1,0 +1,5 @@
+== General information
+
+image::logo.svg[200, 200, role=text-center]
+
+Telek is a https://kotlinlang.org[Kotlin] https://kotlinlang.org/docs/reference/multiplatform.html[Multiplatform] library for https://core.telegram.org/bots/api[Telegram Bot API].

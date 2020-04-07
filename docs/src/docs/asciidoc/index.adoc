@@ -1,0 +1,10 @@
+= Telek
+:sectnums:
+:toc: left
+:toclevels: 2
+:sectanchors: true
+:imagesdir: images
+
+include::src/docs/asciidoc/general.adoc[]
+
+include::src/docs/asciidoc/maven.adoc[]

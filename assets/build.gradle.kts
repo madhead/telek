@@ -6,7 +6,7 @@ import com.bmuschko.gradle.docker.tasks.image.DockerPullImage
 import org.gradle.internal.os.OperatingSystem
 
 plugins {
-    id("com.bmuschko.docker-remote-api").version(Versions.Plugins.DOCKER)
+    id("com.bmuschko.docker-remote-api")
 }
 
 tasks {
