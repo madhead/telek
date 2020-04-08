@@ -120,8 +120,6 @@ bintray:
   image: openjdk:8
   script:
     - ./gradlew publish
-  only:
-    - master
   dependencies: []
 
 pages:
