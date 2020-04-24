@@ -35,5 +35,17 @@ data class Poll(
     val allowsMultipleAnswers: Boolean,
 
     @SerialName("correct_option_id")
-    val correctOptionId: Int? = null
+    val correctOptionId: Int? = null,
+
+    @SerialName("explanation")
+    val explanation: String? = null,
+
+    @SerialName("explanation_entities")
+    val explanationEntities: List<MessageEntity>? = null,
+
+    @SerialName("open_period")
+    val openPeriod: Int? = null,
+
+    @SerialName("close_date")
+    val closeDate: Int? = null
 )

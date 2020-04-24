@@ -30,7 +30,7 @@ import org.junit.jupiter.api.TestMethodOrder
 @ImplicitReflectionSerializer
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@Suppress("TooManyFunctions")
+@Suppress("TooManyFunctions", "MaxLineLength")
 internal class TelekHCTest {
     private val telek = TelekHC(System.getenv("TELEK_HC_TEST_POLL_BOT_TOKEN")!!)
     private val qaUser = System.getenv("TELEK_HC_TEST_POLL_BOT_QA_USER").toInt()
@@ -400,7 +400,7 @@ internal class TelekHCTest {
 
     @Test
     @Order(21)
-    fun sendAudioBytes() = runBlocking {
+    fun sendAudioByBytes() = runBlocking {
         telek.sendAudio(SendAudioRequest(
             chatId = ChatId.of(qaUser),
             audio = InputFile.BytesInputFile(

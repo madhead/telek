@@ -11,6 +11,9 @@ import kotlinx.serialization.Serializable
 @Serializable
 @TelegramBotAPIType(type = "dice")
 data class Dice(
+    @SerialName("emoji")
+    val emoji: String,
+
     @SerialName("value")
     val value: Int
 )

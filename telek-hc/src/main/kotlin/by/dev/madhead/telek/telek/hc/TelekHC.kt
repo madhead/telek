@@ -49,7 +49,7 @@ import java.net.URI
  * [Telek] implementation based on [Apache HttpComponents][http://hc.apache.org].
  */
 @ImplicitReflectionSerializer
-@Suppress("TooManyFunctions")
+@Suppress("TooManyFunctions", "LongMethod", "ComplexMethod")
 class TelekHC(private val token: String) : Telek, AutoCloseable {
     companion object {
         val logger = LogManager.getLogger(TelekHC::class.java)
