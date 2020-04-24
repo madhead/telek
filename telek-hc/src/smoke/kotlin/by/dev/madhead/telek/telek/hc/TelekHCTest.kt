@@ -11,9 +11,14 @@ import by.dev.madhead.telek.model.communication.FileIdInputFile
 import by.dev.madhead.telek.model.communication.ForwardMessageRequest
 import by.dev.madhead.telek.model.communication.GetUpdatesRequest
 import by.dev.madhead.telek.model.communication.InputFile
+import by.dev.madhead.telek.model.communication.SendAnimationRequest
 import by.dev.madhead.telek.model.communication.SendAudioRequest
+import by.dev.madhead.telek.model.communication.SendDocumentRequest
 import by.dev.madhead.telek.model.communication.SendMessageRequest
 import by.dev.madhead.telek.model.communication.SendPhotoRequest
+import by.dev.madhead.telek.model.communication.SendVideoNoteRequest
+import by.dev.madhead.telek.model.communication.SendVideoRequest
+import by.dev.madhead.telek.model.communication.SendVoiceRequest
 import by.dev.madhead.telek.model.communication.URLInputFile
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
@@ -380,32 +385,8 @@ internal class TelekHCTest {
         )).verify()
     }
 
-    //    @Test
-    //    @Order(19)
-    //    fun sendAudioByURL() = runBlocking {
-    //        telek.sendPhoto(SendPhotoRequest(
-    //            chatId = ChatId.of(qaUser),
-    //            photo = URLInputFile("https://pixabay.com/get/54e6dc464f54a514f1dc8460da293276103bdee35a5271_640.jpg"),
-    //            caption = "[Photo](https://pixabay.com/photos/milky-way-starry-sky-night-sky-star-2695569) by URL",
-    //            parseMode = ParseMode.MarkdownV2,
-    //            replyMarkup = verificationInlineKeyboard
-    //        )).verify()
-    //    }
-
-    //    @Test
-    //    @Order(20)
-    //    fun sendAudioById() = runBlocking {
-    //        telek.sendPhoto(SendPhotoRequest(
-    //            chatId = ChatId.of(qaUser),
-    //            photo = FileIdInputFile("AgACAgQAAxkDAAICU15_ZERJnTId9SNEfmKXd8jPyzASAALgqjEb0Un8U9vMJXKk7C4iTpegGwAEAQADAgADeAADUykJAAEYBA"),
-    //            caption = "[Photo](https://pixabay.com/photos/milky-way-starry-sky-night-sky-star-2695569) by file\\_id",
-    //            parseMode = ParseMode.MarkdownV2,
-    //            replyMarkup = verificationInlineKeyboard
-    //        )).verify()
-    //    }
-
     @Test
-    @Order(21)
+    @Order(19)
     fun sendAudioByBytes() = runBlocking {
         telek.sendAudio(SendAudioRequest(
             chatId = ChatId.of(qaUser),
@@ -419,15 +400,101 @@ internal class TelekHCTest {
             performer = "Google",
             title = "Telek",
             thumb = InputFile.BytesInputFile(
-                bytes = TelekHCTest::class.java.getResource("/stars.jpg").readBytes(),
-                filename = "stars.jpg"
+                bytes = TelekHCTest::class.java.getResource("/thumb.jpg").readBytes(),
+                filename = "thumb.jpg"
             ),
             replyMarkup = verificationInlineKeyboard
         )).verify()
     }
 
     @Test
+    @Order(20)
+    fun sendDocumentByBytes() = runBlocking {
+        telek.sendDocument(SendDocumentRequest(
+            chatId = ChatId.of(qaUser),
+            document = InputFile.BytesInputFile(
+                bytes = TelekHCTest::class.java.getResource("/document.pdf").readBytes(),
+                filename = "document.pdf"
+            ),
+            thumb = InputFile.BytesInputFile(
+                bytes = TelekHCTest::class.java.getResource("/thumb.jpg").readBytes(),
+                filename = "thumb.jpg"
+            ),
+            caption = "Document by local file",
+            parseMode = ParseMode.MarkdownV2,
+            replyMarkup = verificationInlineKeyboard
+        )).verify()
+    }
+
+    @Test
+    @Order(21)
+    fun sendVideoByBytes() = runBlocking {
+        telek.sendVideo(SendVideoRequest(
+            chatId = ChatId.of(qaUser),
+            video = InputFile.BytesInputFile(
+                bytes = TelekHCTest::class.java.getResource("/video.mp4").readBytes(),
+                filename = "Red"
+            ),
+            thumb = InputFile.BytesInputFile(
+                bytes = TelekHCTest::class.java.getResource("/thumb.jpg").readBytes(),
+                filename = "thumb.jpg"
+            ),
+            caption = "Video by local file",
+            parseMode = ParseMode.MarkdownV2,
+            replyMarkup = verificationInlineKeyboard
+        )).verify()
+    }
+
+    @Test
     @Order(22)
+    fun sendAnimationByBytes() = runBlocking {
+        telek.sendAnimation(SendAnimationRequest(
+            chatId = ChatId.of(qaUser),
+            animation = InputFile.BytesInputFile(
+                bytes = TelekHCTest::class.java.getResource("/animation.gif").readBytes(),
+                filename = "Fountain"
+            ),
+            thumb = InputFile.BytesInputFile(
+                bytes = TelekHCTest::class.java.getResource("/thumb.jpg").readBytes(),
+                filename = "thumb.jpg"
+            ),
+            caption = "Animation by local file",
+            parseMode = ParseMode.MarkdownV2,
+            replyMarkup = verificationInlineKeyboard
+        )).verify()
+    }
+
+    @Test
+    @Order(23)
+    fun sendVoiceByBytes() = runBlocking {
+        telek.sendVoice(SendVoiceRequest(
+            chatId = ChatId.of(qaUser),
+            voice = InputFile.BytesInputFile(
+                bytes = TelekHCTest::class.java.getResource("/voice.ogg").readBytes(),
+                filename = "Частушка"
+            ),
+            caption = "Voice by local file",
+            parseMode = ParseMode.MarkdownV2,
+            replyMarkup = verificationInlineKeyboard
+        )).verify()
+    }
+
+    @Test
+    @Order(24)
+    fun sendVideoNoteByBytes() = runBlocking {
+        telek.sendVideoNote(SendVideoNoteRequest(
+            chatId = ChatId.of(qaUser),
+            videoNote = InputFile.BytesInputFile(
+                bytes = TelekHCTest::class.java.getResource("/video.mp4").readBytes(),
+                filename = "Red"
+            ),
+            length = 512,
+            replyMarkup = verificationInlineKeyboard
+        )).verify()
+    }
+
+    @Test
+    @Order(25)
     fun editMessageReplyMarkup() = runBlocking {
         val message = telek.sendMessage(SendMessageRequest(
             chatId = ChatId.of(qaUser),

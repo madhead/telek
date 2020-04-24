@@ -12,9 +12,14 @@ import by.dev.madhead.telek.model.communication.GetUpdatesRequest
 import by.dev.madhead.telek.model.communication.InputFile
 import by.dev.madhead.telek.model.communication.MessageOrBoolean
 import by.dev.madhead.telek.model.communication.Response
+import by.dev.madhead.telek.model.communication.SendAnimationRequest
 import by.dev.madhead.telek.model.communication.SendAudioRequest
+import by.dev.madhead.telek.model.communication.SendDocumentRequest
 import by.dev.madhead.telek.model.communication.SendMessageRequest
 import by.dev.madhead.telek.model.communication.SendPhotoRequest
+import by.dev.madhead.telek.model.communication.SendVideoNoteRequest
+import by.dev.madhead.telek.model.communication.SendVideoRequest
+import by.dev.madhead.telek.model.communication.SendVoiceRequest
 import by.dev.madhead.telek.model.communication.SetWebhookRequest
 import by.dev.madhead.telek.model.json
 import by.dev.madhead.telek.telek.Telek
@@ -232,7 +237,7 @@ class TelekHC(private val token: String) : Telek, AutoCloseable {
             }
         } else {
             HttpPost().apply {
-                uri = methodURI("sendPhoto")
+                uri = methodURI("sendAudio")
                 entity = withContext(Dispatchers.IO) {
                     BufferedHttpEntity(
                         MultipartEntityBuilder.create().apply {
@@ -314,24 +319,419 @@ class TelekHC(private val token: String) : Telek, AutoCloseable {
         return callApi(httpRequest, Message.serializer())
     }
 
-    override suspend fun sendDocument() {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+    override suspend fun sendDocument(request: SendDocumentRequest): Message {
+        val document = request.document
+        val thumb = request.thumb
+
+        val httpRequest = if ((document is InputFile.StringInputFile) && (thumb is InputFile.StringInputFile)) {
+            HttpPost().apply {
+                uri = methodURI("sendDocument")
+                entity = StringEntity(json.stringify(SendDocumentRequest.serializer(), request), ContentType.APPLICATION_JSON)
+            }
+        } else {
+            HttpPost().apply {
+                uri = methodURI("sendDocument")
+                entity = withContext(Dispatchers.IO) {
+                    BufferedHttpEntity(
+                        MultipartEntityBuilder.create().apply {
+                            addPart("chat_id", StringBody(request.chatId.asString(), ContentType.MULTIPART_FORM_DATA))
+
+                            when (document) {
+                                is InputFile.FilePathInputFile -> {
+                                    val file = File(document.path)
+
+                                    addPart(
+                                        "document",
+                                        InputStreamBody(FileInputStream(file), ContentType.DEFAULT_BINARY, file.name)
+                                    )
+                                }
+                                is InputFile.BytesInputFile -> {
+                                    addPart(
+                                        "document",
+                                        InputStreamBody(ByteArrayInputStream(document.bytes), ContentType.DEFAULT_BINARY, document.filename)
+                                    )
+                                }
+                                is InputFile.StringInputFile -> {
+                                    addPart("document", StringBody(document.value, ContentType.MULTIPART_FORM_DATA))
+                                }
+                            }
+
+                            when (thumb) {
+                                is InputFile.FilePathInputFile -> {
+                                    val file = File(thumb.path)
+
+                                    addPart(
+                                        "thumb",
+                                        InputStreamBody(FileInputStream(file), ContentType.DEFAULT_BINARY, file.name)
+                                    )
+                                }
+                                is InputFile.BytesInputFile -> {
+                                    addPart(
+                                        "thumb",
+                                        InputStreamBody(ByteArrayInputStream(thumb.bytes), ContentType.DEFAULT_BINARY, thumb.filename)
+                                    )
+                                }
+                                is InputFile.StringInputFile -> {
+                                    addPart("thumb", StringBody(thumb.value, ContentType.MULTIPART_FORM_DATA))
+                                }
+                            }
+
+                            request.caption?.let {
+                                addPart("caption", StringBody(it, ContentType.MULTIPART_FORM_DATA))
+                            }
+                            request.parseMode?.let {
+                                addPart("parse_mode", StringBody(it.name, ContentType.MULTIPART_FORM_DATA))
+                            }
+                            if (request.disableNotification == true) {
+                                addPart("disable_notification", StringBody("true", ContentType.MULTIPART_FORM_DATA))
+                            }
+                            request.replyToMessageId?.let {
+                                addPart("reply_to_message_id", StringBody(it.toString(), ContentType.MULTIPART_FORM_DATA))
+                            }
+                            request.replyMarkup?.let {
+                                addPart("reply_markup", StringBody(
+                                    json.stringify(ContextSerializer(ReplyMarkup::class), it), ContentType.APPLICATION_JSON
+                                ))
+                            }
+                        }.build()
+                    )
+                }
+            }
+        }
+
+        return callApi(httpRequest, Message.serializer())
     }
 
-    override suspend fun sendVideo() {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+    override suspend fun sendVideo(request: SendVideoRequest): Message {
+        val video = request.video
+        val thumb = request.thumb
+
+        val httpRequest = if ((video is InputFile.StringInputFile) && (thumb is InputFile.StringInputFile)) {
+            HttpPost().apply {
+                uri = methodURI("sendVideo")
+                entity = StringEntity(json.stringify(SendVideoRequest.serializer(), request), ContentType.APPLICATION_JSON)
+            }
+        } else {
+            HttpPost().apply {
+                uri = methodURI("sendVideo")
+                entity = withContext(Dispatchers.IO) {
+                    BufferedHttpEntity(
+                        MultipartEntityBuilder.create().apply {
+                            addPart("chat_id", StringBody(request.chatId.asString(), ContentType.MULTIPART_FORM_DATA))
+
+                            when (video) {
+                                is InputFile.FilePathInputFile -> {
+                                    val file = File(video.path)
+
+                                    addPart(
+                                        "video",
+                                        InputStreamBody(FileInputStream(file), ContentType.DEFAULT_BINARY, file.name)
+                                    )
+                                }
+                                is InputFile.BytesInputFile -> {
+                                    addPart(
+                                        "video",
+                                        InputStreamBody(ByteArrayInputStream(video.bytes), ContentType.DEFAULT_BINARY, video.filename)
+                                    )
+                                }
+                                is InputFile.StringInputFile -> {
+                                    addPart("video", StringBody(video.value, ContentType.MULTIPART_FORM_DATA))
+                                }
+                            }
+
+                            request.duration?.let {
+                                addPart("duration", StringBody(it.toString(), ContentType.MULTIPART_FORM_DATA))
+                            }
+                            request.width?.let {
+                                addPart("width", StringBody(it.toString(), ContentType.MULTIPART_FORM_DATA))
+                            }
+                            request.height?.let {
+                                addPart("height", StringBody(it.toString(), ContentType.MULTIPART_FORM_DATA))
+                            }
+
+                            when (thumb) {
+                                is InputFile.FilePathInputFile -> {
+                                    val file = File(thumb.path)
+
+                                    addPart(
+                                        "thumb",
+                                        InputStreamBody(FileInputStream(file), ContentType.DEFAULT_BINARY, file.name)
+                                    )
+                                }
+                                is InputFile.BytesInputFile -> {
+                                    addPart(
+                                        "thumb",
+                                        InputStreamBody(ByteArrayInputStream(thumb.bytes), ContentType.DEFAULT_BINARY, thumb.filename)
+                                    )
+                                }
+                                is InputFile.StringInputFile -> {
+                                    addPart("thumb", StringBody(thumb.value, ContentType.MULTIPART_FORM_DATA))
+                                }
+                            }
+
+                            request.caption?.let {
+                                addPart("caption", StringBody(it, ContentType.MULTIPART_FORM_DATA))
+                            }
+                            request.parseMode?.let {
+                                addPart("parse_mode", StringBody(it.name, ContentType.MULTIPART_FORM_DATA))
+                            }
+                            if (request.supportsStreaming == true) {
+                                addPart("supports_streaming", StringBody("true", ContentType.MULTIPART_FORM_DATA))
+                            }
+                            if (request.disableNotification == true) {
+                                addPart("disable_notification", StringBody("true", ContentType.MULTIPART_FORM_DATA))
+                            }
+                            request.replyToMessageId?.let {
+                                addPart("reply_to_message_id", StringBody(it.toString(), ContentType.MULTIPART_FORM_DATA))
+                            }
+                            request.replyMarkup?.let {
+                                addPart("reply_markup", StringBody(
+                                    json.stringify(ContextSerializer(ReplyMarkup::class), it), ContentType.APPLICATION_JSON
+                                ))
+                            }
+                        }.build()
+                    )
+                }
+            }
+        }
+
+        return callApi(httpRequest, Message.serializer())
     }
 
-    override suspend fun sendAnimation() {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+    override suspend fun sendAnimation(request: SendAnimationRequest): Message {
+        val animation = request.animation
+        val thumb = request.thumb
+
+        val httpRequest = if ((animation is InputFile.StringInputFile) && (thumb is InputFile.StringInputFile)) {
+            HttpPost().apply {
+                uri = methodURI("sendAnimation")
+                entity = StringEntity(json.stringify(SendAnimationRequest.serializer(), request), ContentType.APPLICATION_JSON)
+            }
+        } else {
+            HttpPost().apply {
+                uri = methodURI("sendAnimation")
+                entity = withContext(Dispatchers.IO) {
+                    BufferedHttpEntity(
+                        MultipartEntityBuilder.create().apply {
+                            addPart("chat_id", StringBody(request.chatId.asString(), ContentType.MULTIPART_FORM_DATA))
+
+                            when (animation) {
+                                is InputFile.FilePathInputFile -> {
+                                    val file = File(animation.path)
+
+                                    addPart(
+                                        "animation",
+                                        InputStreamBody(FileInputStream(file), ContentType.DEFAULT_BINARY, file.name)
+                                    )
+                                }
+                                is InputFile.BytesInputFile -> {
+                                    addPart(
+                                        "animation",
+                                        InputStreamBody(ByteArrayInputStream(animation.bytes), ContentType.DEFAULT_BINARY, animation.filename)
+                                    )
+                                }
+                                is InputFile.StringInputFile -> {
+                                    addPart("animation", StringBody(animation.value, ContentType.MULTIPART_FORM_DATA))
+                                }
+                            }
+
+                            request.duration?.let {
+                                addPart("duration", StringBody(it.toString(), ContentType.MULTIPART_FORM_DATA))
+                            }
+                            request.width?.let {
+                                addPart("width", StringBody(it.toString(), ContentType.MULTIPART_FORM_DATA))
+                            }
+                            request.height?.let {
+                                addPart("height", StringBody(it.toString(), ContentType.MULTIPART_FORM_DATA))
+                            }
+
+                            when (thumb) {
+                                is InputFile.FilePathInputFile -> {
+                                    val file = File(thumb.path)
+
+                                    addPart(
+                                        "thumb",
+                                        InputStreamBody(FileInputStream(file), ContentType.DEFAULT_BINARY, file.name)
+                                    )
+                                }
+                                is InputFile.BytesInputFile -> {
+                                    addPart(
+                                        "thumb",
+                                        InputStreamBody(ByteArrayInputStream(thumb.bytes), ContentType.DEFAULT_BINARY, thumb.filename)
+                                    )
+                                }
+                                is InputFile.StringInputFile -> {
+                                    addPart("thumb", StringBody(thumb.value, ContentType.MULTIPART_FORM_DATA))
+                                }
+                            }
+
+                            request.caption?.let {
+                                addPart("caption", StringBody(it, ContentType.MULTIPART_FORM_DATA))
+                            }
+                            request.parseMode?.let {
+                                addPart("parse_mode", StringBody(it.name, ContentType.MULTIPART_FORM_DATA))
+                            }
+                            if (request.disableNotification == true) {
+                                addPart("disable_notification", StringBody("true", ContentType.MULTIPART_FORM_DATA))
+                            }
+                            request.replyToMessageId?.let {
+                                addPart("reply_to_message_id", StringBody(it.toString(), ContentType.MULTIPART_FORM_DATA))
+                            }
+                            request.replyMarkup?.let {
+                                addPart("reply_markup", StringBody(
+                                    json.stringify(ContextSerializer(ReplyMarkup::class), it), ContentType.APPLICATION_JSON
+                                ))
+                            }
+                        }.build()
+                    )
+                }
+            }
+        }
+
+        return callApi(httpRequest, Message.serializer())
     }
 
-    override suspend fun sendVoice() {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+    override suspend fun sendVoice(request: SendVoiceRequest): Message {
+        val httpRequest = when (val voice = request.voice) {
+            is InputFile.StringInputFile -> HttpPost().apply {
+                uri = methodURI("sendVoice")
+                entity = StringEntity(json.stringify(SendVoiceRequest.serializer(), request), ContentType.APPLICATION_JSON)
+            }
+            else -> HttpPost().apply {
+                uri = methodURI("sendVoice")
+                entity = withContext(Dispatchers.IO) {
+                    BufferedHttpEntity(
+                        MultipartEntityBuilder.create().apply {
+                            addPart("chat_id", StringBody(request.chatId.asString(), ContentType.MULTIPART_FORM_DATA))
+
+                            when (voice) {
+                                is InputFile.FilePathInputFile -> {
+                                    val file = File(voice.path)
+
+                                    addPart(
+                                        "voice",
+                                        InputStreamBody(FileInputStream(file), ContentType.DEFAULT_BINARY, file.name)
+                                    )
+                                }
+                                is InputFile.BytesInputFile -> {
+                                    addPart(
+                                        "voice",
+                                        InputStreamBody(ByteArrayInputStream(voice.bytes), ContentType.DEFAULT_BINARY, voice.filename)
+                                    )
+                                }
+                            }
+
+                            request.caption?.let {
+                                addPart("caption", StringBody(it, ContentType.MULTIPART_FORM_DATA))
+                            }
+                            request.parseMode?.let {
+                                addPart("parse_mode", StringBody(it.name, ContentType.MULTIPART_FORM_DATA))
+                            }
+                            request.duration?.let {
+                                addPart("duration", StringBody(it.toString(), ContentType.MULTIPART_FORM_DATA))
+                            }
+                            if (request.disableNotification == true) {
+                                addPart("disable_notification", StringBody("true", ContentType.MULTIPART_FORM_DATA))
+                            }
+                            request.replyToMessageId?.let {
+                                addPart("reply_to_message_id", StringBody(it.toString(), ContentType.MULTIPART_FORM_DATA))
+                            }
+                            request.replyMarkup?.let {
+                                addPart("reply_markup", StringBody(
+                                    json.stringify(ContextSerializer(ReplyMarkup::class), it), ContentType.APPLICATION_JSON
+                                ))
+                            }
+                        }.build()
+                    )
+                }
+            }
+        }
+
+        return callApi(httpRequest, Message.serializer())
     }
 
-    override suspend fun sendVideoNote() {
-        TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+    override suspend fun sendVideoNote(request: SendVideoNoteRequest): Message {
+        val videoNote = request.videoNote
+        val thumb = request.thumb
+
+        val httpRequest = if ((videoNote is InputFile.StringInputFile) && (thumb is InputFile.StringInputFile)) {
+            HttpPost().apply {
+                uri = methodURI("sendVideoNote")
+                entity = StringEntity(json.stringify(SendVideoNoteRequest.serializer(), request), ContentType.APPLICATION_JSON)
+            }
+        } else {
+            HttpPost().apply {
+                uri = methodURI("sendVideoNote")
+                entity = withContext(Dispatchers.IO) {
+                    BufferedHttpEntity(
+                        MultipartEntityBuilder.create().apply {
+                            addPart("chat_id", StringBody(request.chatId.asString(), ContentType.MULTIPART_FORM_DATA))
+
+                            when (videoNote) {
+                                is InputFile.FilePathInputFile -> {
+                                    val file = File(videoNote.path)
+
+                                    addPart(
+                                        "video_note",
+                                        InputStreamBody(FileInputStream(file), ContentType.DEFAULT_BINARY, file.name)
+                                    )
+                                }
+                                is InputFile.BytesInputFile -> {
+                                    addPart(
+                                        "video_note",
+                                        InputStreamBody(ByteArrayInputStream(videoNote.bytes), ContentType.DEFAULT_BINARY, videoNote.filename)
+                                    )
+                                }
+                                is InputFile.StringInputFile -> {
+                                    addPart("video_note", StringBody(videoNote.value, ContentType.MULTIPART_FORM_DATA))
+                                }
+                            }
+
+                            request.duration?.let {
+                                addPart("duration", StringBody(it.toString(), ContentType.MULTIPART_FORM_DATA))
+                            }
+                            request.length?.let {
+                                addPart("length", StringBody(it.toString(), ContentType.MULTIPART_FORM_DATA))
+                            }
+
+                            when (thumb) {
+                                is InputFile.FilePathInputFile -> {
+                                    val file = File(thumb.path)
+
+                                    addPart(
+                                        "thumb",
+                                        InputStreamBody(FileInputStream(file), ContentType.DEFAULT_BINARY, file.name)
+                                    )
+                                }
+                                is InputFile.BytesInputFile -> {
+                                    addPart(
+                                        "thumb",
+                                        InputStreamBody(ByteArrayInputStream(thumb.bytes), ContentType.DEFAULT_BINARY, thumb.filename)
+                                    )
+                                }
+                                is InputFile.StringInputFile -> {
+                                    addPart("thumb", StringBody(thumb.value, ContentType.MULTIPART_FORM_DATA))
+                                }
+                            }
+
+                            if (request.disableNotification == true) {
+                                addPart("disable_notification", StringBody("true", ContentType.MULTIPART_FORM_DATA))
+                            }
+                            request.replyToMessageId?.let {
+                                addPart("reply_to_message_id", StringBody(it.toString(), ContentType.MULTIPART_FORM_DATA))
+                            }
+                            request.replyMarkup?.let {
+                                addPart("reply_markup", StringBody(
+                                    json.stringify(ContextSerializer(ReplyMarkup::class), it), ContentType.APPLICATION_JSON
+                                ))
+                            }
+                        }.build()
+                    )
+                }
+            }
+        }
+
+        return callApi(httpRequest, Message.serializer())
     }
 
     override suspend fun sendMediaGroup() {

@@ -9,9 +9,14 @@ import by.dev.madhead.telek.model.communication.EditMessageReplyMarkupRequest
 import by.dev.madhead.telek.model.communication.ForwardMessageRequest
 import by.dev.madhead.telek.model.communication.GetUpdatesRequest
 import by.dev.madhead.telek.model.communication.MessageOrBoolean
+import by.dev.madhead.telek.model.communication.SendAnimationRequest
 import by.dev.madhead.telek.model.communication.SendAudioRequest
+import by.dev.madhead.telek.model.communication.SendDocumentRequest
 import by.dev.madhead.telek.model.communication.SendMessageRequest
 import by.dev.madhead.telek.model.communication.SendPhotoRequest
+import by.dev.madhead.telek.model.communication.SendVideoNoteRequest
+import by.dev.madhead.telek.model.communication.SendVideoRequest
+import by.dev.madhead.telek.model.communication.SendVoiceRequest
 import by.dev.madhead.telek.model.communication.SetWebhookRequest
 
 /**
@@ -90,21 +95,21 @@ interface Telek {
      * On success, the sent [Message] is returned.
      * Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
      */
-    suspend fun sendDocument()
+    suspend fun sendDocument(request: SendDocumentRequest): Message
 
     /**
      * Use this method to send video files, Telegram clients support mp4 videos (other formats may be sent as
      * [Document][by.dev.madhead.telek.model.Document]). On success, the sent [Message] is returned. Bots can currently send video files
      * of up to 50 MB in size, this limit may be changed in the future.
      */
-    suspend fun sendVideo()
+    suspend fun sendVideo(request: SendVideoRequest): Message
 
     /**
      * Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound).
      * On success, the sent [Message] is returned.
      * Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
      */
-    suspend fun sendAnimation()
+    suspend fun sendAnimation(request: SendAnimationRequest): Message
 
     /**
      * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message.
@@ -113,13 +118,13 @@ interface Telek {
      * On success, the sent [Message] is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be
      * changed in the future.
      */
-    suspend fun sendVoice()
+    suspend fun sendVoice(request: SendVoiceRequest): Message
 
     /**
      * As of [v.4.0][https://telegram.org/blog/video-messages-and-telescope], Telegram clients support rounded square mp4 videos of up to
      * 1 minute long. Use this method to send video messages. On success, the sent [Message] is returned.
      */
-    suspend fun sendVideoNote()
+    suspend fun sendVideoNote(request: SendVideoNoteRequest): Message
 
     /**
      * Use this method to send a group of photos or videos as an album.
