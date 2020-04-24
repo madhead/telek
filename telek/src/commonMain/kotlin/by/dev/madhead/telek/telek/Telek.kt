@@ -9,6 +9,7 @@ import by.dev.madhead.telek.model.communication.EditMessageReplyMarkupRequest
 import by.dev.madhead.telek.model.communication.ForwardMessageRequest
 import by.dev.madhead.telek.model.communication.GetUpdatesRequest
 import by.dev.madhead.telek.model.communication.MessageOrBoolean
+import by.dev.madhead.telek.model.communication.SendAudioRequest
 import by.dev.madhead.telek.model.communication.SendMessageRequest
 import by.dev.madhead.telek.model.communication.SendPhotoRequest
 import by.dev.madhead.telek.model.communication.SetWebhookRequest
@@ -82,7 +83,7 @@ interface Telek {
      *
      * For sending voice messages, use the [sendVoice] method instead.
      */
-    suspend fun sendAudio()
+    suspend fun sendAudio(request: SendAudioRequest): Message
 
     /**
      * Use this method to send general files.
