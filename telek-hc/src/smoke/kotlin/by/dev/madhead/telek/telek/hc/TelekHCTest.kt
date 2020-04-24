@@ -332,6 +332,12 @@ internal class TelekHCTest {
             chatId = ChatId.of(qaUser),
             fromChatId = ChatId.of(message.chat.id),
             messageId = message.messageId
+        ))
+        delay(1000)
+        telek.sendMessage(SendMessageRequest(
+            chatId = ChatId.of(qaUser),
+            text = "Have you seen the forwarded message?",
+            replyMarkup = verificationInlineKeyboard
         )).verify()
     }
 
